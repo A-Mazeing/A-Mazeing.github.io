@@ -6,93 +6,26 @@
 <title>Teachable Machine Beispiel</title>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
-<style>
-    .container{
-        background-image: url('Background.png) 
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-
+<!-- Wird der Startbutton von der Startseite sein    <button type="button" onclick="init()">Start</button> -->
 <!-- Container für den Teachable Machine Code -->
-<div id="container">
-    <!-- Überschrift für das Modell -->
-    <div>Teachable Machine Image Model</div>
-    <!-- Button zum Starten -->
-    <button type="button" onclick="init()">Start</button>
+<div class="container">
     <!-- Container für die Webcam-Ansicht -->
-    <div id="webcam-container" style="background-color: black; width: 200px; height: 200px;"></div>
-    <!-- Container für die Klassifizierungen -->
-    <div id="label-container"></div>
+    <div id="webcam-container"></div>
+    <button type = "button" class = "btn btn-primary test_start_Button" onclick="init()">Test Start</button>
+    <button type="button" class="btn btn-primary ergebnis_button" onclick="loop()">Klassifizieren</button>
+
+    <!-- Container für die Klassifizierungen 
+    old: <div id="label-container"></div>-->
+    <div id = "Ergebnis_Text">Ergebnis</div>
+    <div id = "Exp_Ergebnis">Exponat: 0%</div>
+    <div id = "Exp_Beschreibung">Beschreibung</div>
+    <div id = "Logo_DDI_EDU"></div>
 </div>
 
-<script type="text/javascript">
-    // der Link zu Ihrem Modell von Teachable Machine
-    const URL = 'https://teachablemachine.withgoogle.com/models/x7VbUE8f3/';
-
-    let model, webcam, labelContainer, maxPredictions;
-    let isIos = false; 
-    // Prüfen, ob es sich um ein iOS-Gerät handelt
-    if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
-      isIos = true;
-    }
-
-    // Funktion zum Initialisieren des Modells und der Webcam
-    async function init() {
-        const modelURL = URL + 'model.json';
-        const metadataURL = URL + 'metadata.json';
-
-        model = await tmImage.load(modelURL, metadataURL);
-        maxPredictions = model.getTotalClasses();
-
-        const flip = true; // ob die Webcam gespiegelt werden soll
-        const width = 200;
-        const height = 200;
-        webcam = new tmImage.Webcam(width, height, flip);
-        await webcam.setup();
-
-        // Wenn es sich um ein iOS-Gerät handelt, füge die Webcam direkt ein
-        if (isIos) {
-            document.getElementById('webcam-container').appendChild(webcam.webcam);
-            const webCamVideo = document.getElementsByTagName('video')[0];
-            webCamVideo.setAttribute("playsinline", true);
-            webCamVideo.muted = "true";
-            webCamVideo.style.width = width + 'px';
-            webCamVideo.style.height = height + 'px';
-        } else {
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
-        }
-
-        // Container für die Klassifizierungen
-        labelContainer = document.getElementById('label-container');
-        for (let i = 0; i < maxPredictions; i++) {
-            labelContainer.appendChild(document.createElement('div'));
-        }
-        webcam.play();
-        window.requestAnimationFrame(loop);
-    }
-
-    // Funktion zum Aktualisieren und Vorhersagen mit der Webcam
-    async function loop() {
-        webcam.update();
-        await predict();
-        window.requestAnimationFrame(loop);
-    }
-
-    // Funktion zum Durchführen von Vorhersagen
-    async function predict() {
-        let prediction;
-        if (isIos) {
-            prediction = await model.predict(webcam.webcam);
-        } else {
-            prediction = await model.predict(webcam.canvas);
-        }
-        for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction =
-                prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
-        }
-    }
+<script src="Model.js">
 </script>
 
 </body>
