@@ -1,0 +1,18 @@
+.container {
+    background-image: url('Background.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1600px;
+    height: 2560px;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.ergebnis_button {
+    background-color: magenta; /* Hintergrundfarbe */
+    font-family: 'Open Sans', sans-serif; /* Schriftart */
+    border-radius: 50%; /* Runde Ecken */
+    padding: 10px 20px; /* Innenabstand */
+  }
