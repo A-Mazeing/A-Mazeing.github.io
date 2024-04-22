@@ -1,19 +1,75 @@
 .container {
     background-image: url('Background.jpg');
-    background-size: contain;
-    background-position: center;
+    background-size: 100% 100%; 
+    background-position: left;
     background-repeat: no-repeat;
-    width: 1600px;
-    height: 2560px;
-    text-align: center;
+    width: 100vw; 
+    height: 100vh; 
     box-sizing: border-box;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column;
+}
+
+.container > * {
+    margin-bottom: 10px; 
+}
+
+#webcam-container {
+    width: 300px;
+    height: 300px;
+    background-color: rgb(94, 94, 94);
+    border-radius: 20%;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+/*TU-Font*/
+@font-face {
+    font-family: 'Open Sans Regular';
+    src: url('Fonts/OpenSans-Regular.ttf') format('truetype');
 }
 
 .ergebnis_button {
-    background-color: magenta;
+    background-color: rgba(233, 6, 233, 0.815);
     color: white;
-    font-family: 'Open Sans', sans-serif;
-    border-radius: 10%;
-    padding: 10px 200px;
+    font-family: 'Open Sans Bold', sans-serif;
+    border-radius: 20px; /* Setze den Border-Radius für einen abgerundeten Button */
+    padding: 1% 20%; /* Ändere die Polsterung, um den Button anzupassen */
     font-size: 20px;
+    border: none; /* Entferne den Rahmen, um einen glatten Button zu erhalten */
+    cursor: pointer; /* Ändere den Cursor, um anzuzeigen, dass der Button anklickbar ist */
+    transition: background-color 0.75s; /* Füge eine Übergangseffekt für den Hover-Effekt hinzu */
+}
+
+.ergebnis_button:hover {
+    background-color: rgba(104, 2, 104, 0.815); /* Dunklerer Hintergrund beim Hover */
+}
+
+
+/*TU-Font*/
+@font-face {
+    font-family: 'Open Sans Bold';
+    src: url('Fonts/OpenSans-Bold.ttf') format('truetype');
+}
+
+#Ergebnis_Text {
+    color: #d9e229ff;
+    font-family: 'Open Sans Bold', sans-serif; 
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#Exp_Ergebnis, #Exp_Beschreibung {
+    color: white; 
+    font-family: 'Open Sans Regular', sans-serif;
+    font-size: 20px;
+    
+}
+
+#logo
+{
+    width: 200px;
+    height: auto;
 }

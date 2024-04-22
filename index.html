@@ -10,20 +10,21 @@
 </head>
 <body>
 <!-- Wird der Startbutton von der Startseite sein    <button type="button" onclick="init()">Start</button> -->
-<!-- Container für den Teachable Machine Code -->
 <div class="container">
-    <!-- Container für die Webcam-Ansicht -->
+    <!-- Webcam-Container -->
     <div id="webcam-container"></div>
-    <button type = "button" class = "btn btn-primary test_start_Button" onclick="init()">Test Start</button>
+
+    <!-- Buttons -->
+    <button type="button" class="btn btn-primary test_start_Button" onclick="init()">Test Start</button>
     <button type="button" class="btn btn-primary ergebnis_button" onclick="loop()">Klassifizieren</button>
 
-    <!-- Container für die Klassifizierungen 
-    old: <div id="label-container"></div>-->
-    <div id = "Ergebnis_Text">Ergebnis</div>
-    <div id = "Exp_Ergebnis">Exponat: 0%</div>
-    <div id = "Exp_Beschreibung">Beschreibung</div>
-    <div id = "Logo_DDI_EDU"></div>
+    <!-- Container für die Klassifizierungen -->
+    <div id="Ergebnis_Text">Ergebnis</div>
+    <div id="Exp_Ergebnis">Exponat: 0%</div>
+    <div id="Exp_Beschreibung">Beschreibung</div>
+    <img id="logo" src="Logo_DDI.jpg" alt="Logo DDI">
 </div>
+
 
 <script src="Model.js">
 </script>
