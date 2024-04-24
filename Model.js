@@ -36,16 +36,21 @@ async function init() {
         webCamVideo.style.width = width + 'px';
         webCamVideo.style.height = height + 'px';
     } else {
-        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        const canvas = webcam.canvas;
+        canvas.id = 'webcam-canvas'; // Setzt die ID des Canvas-Elements
+        canvas.style.borderRadius = 'inherit'; // Übernimmt die runde Form vom Webcam-Container
+        document.getElementById("webcam-container").appendChild(canvas);
     }
 
     // Container für die Klassifizierungen
-    labelContainer = document.getElementById('label-container');
+    labelContainer = document.getElementById('Exp_Ergebnis');
     for (let i = 0; i < maxPredictions; i++) {
         labelContainer.appendChild(document.createElement('div'));
     }
     webcam.play();
     window.requestAnimationFrame(loop);
+    //Altes Div auf Schwarz nach start der Kamera um Rand zu entfernen
+    document.getElementById('webcam-container').style.backgroundColor = 'black';
 }
 
 // Funktion zum Aktualisieren und Vorhersagen mit der Webcam
@@ -66,6 +71,6 @@ async function predict() {
     for (let i = 0; i < maxPredictions; i++) {
         const classPrediction =
             prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
+        labelContainer.innerHTML = classPrediction;
     }
 }
