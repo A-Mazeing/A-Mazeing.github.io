@@ -77,16 +77,19 @@ async function predict() {
 
 async function switchCamera()
 {
-    webcam.stop();
-
-    if (webcam.facingMode == "user")
+    if (isIos)
     {
-        webcam.facingMode = "environment";
-    }else
-    {
-        webcam.facingMode = "user"
+        const videoContraints = 
+        {
+            facingMode: (webcam.webcam.getSettings().facingMode === 'user') ? 'environment' : 'user'
+        };
+        webcam.webcam.srcObject.getVideoTracks().forEach(track => track.applyConstraints(videoConstraints));
+    } else {
+        const constraints = 
+        {
+            video: {facingMode: 'environment'}
+        };
+        webcam = new tmImage.Webcam(200, 200, true);
+        await webcam.setup(constraints)
     }
-
-    await webcam.setup();
-    webcam.play();
 }

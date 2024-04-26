@@ -6,8 +6,3 @@ function BildschirmSwitch()
     startseite.style.display = 'none';
     container.style.display = 'flex';
 }
-
-function CamSwitch()
-{
-
-}
