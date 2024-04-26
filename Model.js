@@ -40,6 +40,12 @@ async function init() {
         canvas.id = 'webcam-canvas'; // Setzt die ID des Canvas-Elements
         canvas.style.borderRadius = 'inherit'; // Übernimmt die runde Form vom Webcam-Container
         document.getElementById("webcam-container").appendChild(canvas);
+        // Webcam neu initialisieren mit der Änderung der facingMode-Eigenschaft (nur für Nicht-iOS-Geräte)
+        const constraints = {
+            video: 
+                { facingMode: 'environment' }
+        };
+        await webcam.setup(constraints);
     }
 
     // Container für die Klassifizierungen
@@ -48,6 +54,7 @@ async function init() {
         labelContainer.appendChild(document.createElement('div'));
     }
     webcam.play();
+    switchCamera();
     window.requestAnimationFrame(loop);
     //Altes Div auf Schwarz nach start der Kamera um Rand zu entfernen
     document.getElementById('webcam-container').style.backgroundColor = 'black';
