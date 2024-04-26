@@ -2,15 +2,19 @@ body {
     margin: 0; /* Rand um das body-Element entfernen */
     padding: 0; /* Innenabstand des body-Element aufheben */
 }
+
+
+
+/*Allgemeine Site Div*/
 .container {
-    background-image: url('Background.jpg');
+    background-image: url('Pics/Background.jpg');
     background-size: 100% 100%; 
     background-position: left;
     background-repeat: no-repeat;
     width: 100vw; 
     height: 100vh; 
     box-sizing: border-box;
-    display: flex; 
+    display: flex; /*deaktiviert beim Start*/ 
     justify-content: center; 
     align-items: center; 
     flex-direction: column;
@@ -47,10 +51,10 @@ body {
     background-color: rgba(233, 6, 233, 0.815);
     color: white;
     font-family: 'Open Sans Bold', sans-serif;
-    border-radius: 20px; /* Setze den Border-Radius für einen abgerundeten Button */
-    padding: 1% 20%; /* Ändere die Polsterung, um den Button anzupassen */
+    border-radius: 20px; 
+    padding: 1% 20%; 
     font-size: 20px;
-    border: none; /* Entferne den Rahmen, um einen glatten Button zu erhalten */
+    border: none; 
     cursor: pointer; /* Ändere den Cursor, um anzuzeigen, dass der Button anklickbar ist */
     transition: background-color 0.75s; /* Füge eine Übergangseffekt für den Hover-Effekt hinzu */
 }
@@ -87,4 +91,23 @@ body {
     position: absolute;
     bottom: 30px;
     
+}
+
+#camSwitch
+{
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: none;
+    border: none;
+    padding: 0;
+    border-radius: 20%;
+}
+#camSwitchIcon
+{
+    width: 100%;
+    height: 100%;
 }

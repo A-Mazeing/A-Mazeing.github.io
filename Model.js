@@ -74,3 +74,19 @@ async function predict() {
         labelContainer.innerHTML = classPrediction;
     }
 }
+
+async function switchCamera()
+{
+    webcam.stop();
+
+    if (webcam.facingMode == "user")
+    {
+        webcam.facingMode = "environment";
+    }else
+    {
+        webcam.facingMode = "user"
+    }
+
+    await webcam.setup();
+    webcam.play();
+}

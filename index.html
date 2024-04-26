@@ -10,10 +10,22 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script src="Model.js"></script>
-    <!-- Wird der Startbutton von der Startseite sein    <button type="button" onclick="init()">Start</button> -->
+    <script src="siteFunctions.js"></script>
+    <!-- Wird der Startbutton von der Startseite sein -->
+
+    <div id = "startseite">
+        <button id = "startButton" type="button" onclick="BildschirmSwitch()">Start</button>
+    </div>
+    
+    
+    <!-- Bereich Main mit Kamera Canvas-->
     <div class="container">
         <!-- Webcam-Container -->
-        <div id="webcam-container"></div>
+        <div id="webcam-container">
+            <button id="camSwitch" onclick="switchCamera()">
+                <img id = "camSwitchIcon" src="Pics/camSwitchIcon.png">
+            </button>
+        </div>
 
         <!-- Buttons -->
         <button type="button" class="btn btn-primary ergebnis_button" onclick="init()">Klassifizieren</button>
@@ -22,7 +34,7 @@
         <div id="Ergebnis_Text">Ergebnis</div>
         <div id="Exp_Ergebnis">Exponat: 0%</div>
         <!--<div id="Exp_Beschreibung">Beschreibung</div> -->
-        <img id="logo" src="Logo_DDI.jpg" alt="Logo DDI">
+        <img id="logo" src="Pics\Logo_DDI.jpg" alt="Logo DDI">
     </div>
 
 </body>
