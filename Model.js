@@ -31,7 +31,7 @@ async function init() {
     if (!bCanvasCreating) {
         // Wenn eine externe Kamera verwendet werden soll, verwende die Außenkamera
         if (useExternalCamera) {
-            try {
+            //try {
                 const externalStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
                 const externalVideo = document.createElement('video');
                 externalVideo.srcObject = externalStream;
@@ -42,13 +42,13 @@ async function init() {
                 externalVideo.play();
 
                 document.getElementById('webcam-container').appendChild(externalVideo);
-            } catch (error) {
+            //} catch (error) {
                 console.error('Unable to access external camera:', error);
                 // Fallback to default camera
                 webcam = new tmImage.Webcam(width, height, flip);
                 await webcam.setup();
                 bCanvasCreating = true;
-            }
+            //}
         } else {
             // Verwende die Standard-Webcam
             webcam = new tmImage.Webcam(width, height, flip);
