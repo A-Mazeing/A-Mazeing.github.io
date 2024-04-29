@@ -20,13 +20,43 @@ async function init() {
     const flip = true; // ob die Webcam gespiegelt werden soll
     const width = 200;
     const height = 200;
-    if(!bCanvasCreating)
-    {
-        webcam = new tmImage.Webcam(width, height, flip);
-        await webcam.setup();
-        bCanvasCreating = true
+
+    let useExternalCamera = false; // Flag, um zu bestimmen, ob die Außenkamera verwendet werden soll
+
+    // Überprüfen, ob es sich um ein Mobilgerät handelt
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        useExternalCamera = true; // Wenn ja, verwende die Außenkamera
     }
-    
+
+    if (!bCanvasCreating) {
+        // Wenn eine externe Kamera verwendet werden soll, verwende die Außenkamera
+        if (useExternalCamera) {
+            try {
+                const externalStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                const externalVideo = document.createElement('video');
+                externalVideo.srcObject = externalStream;
+                externalVideo.setAttribute('playsinline', true);
+                externalVideo.muted = true;
+                externalVideo.style.width = width + 'px';
+                externalVideo.style.height = height + 'px';
+                externalVideo.play();
+
+                document.getElementById('webcam-container').appendChild(externalVideo);
+            } catch (error) {
+                console.error('Unable to access external camera:', error);
+                // Fallback to default camera
+                webcam = new tmImage.Webcam(width, height, flip);
+                await webcam.setup();
+                bCanvasCreating = true;
+            }
+        } else {
+            // Verwende die Standard-Webcam
+            webcam = new tmImage.Webcam(width, height, flip);
+            await webcam.setup();
+            bCanvasCreating = true;
+        }
+    }
+
     // Wenn es sich um ein iOS-Gerät handelt, füge die Webcam direkt ein
     if (isIos) {
         document.getElementById('webcam-container').appendChild(webcam.webcam);
@@ -47,12 +77,12 @@ async function init() {
     for (let i = 0; i < maxPredictions; i++) {
         labelContainer.appendChild(document.createElement('div'));
     }
-    webcam.flip();
     webcam.play();
     window.requestAnimationFrame(loop);
     //Altes Div auf Schwarz nach start der Kamera um Rand zu entfernen
     document.getElementById('webcam-container').style.backgroundColor = 'black';
 }
+
 
 // Funktion zum Aktualisieren und Vorhersagen mit der Webcam
 async function loop() {
