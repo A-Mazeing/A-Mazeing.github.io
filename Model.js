@@ -47,6 +47,7 @@ async function init() {
     for (let i = 0; i < maxPredictions; i++) {
         labelContainer.appendChild(document.createElement('div'));
     }
+    webcam.flip();
     webcam.play();
     window.requestAnimationFrame(loop);
     //Altes Div auf Schwarz nach start der Kamera um Rand zu entfernen
@@ -73,29 +74,4 @@ async function predict() {
             prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
         labelContainer.innerHTML = classPrediction;
     }
-}
-
-async function switchCamera() {
-    // Stoppe die Webcam, um sie neu zu konfigurieren
-    webcam.stop();
-
-    // Hole alle Videotracks der Webcam
-    const videoTracks = webcam.webcam.getVideoTracks();
-
-    // Überprüfe, ob es Videotracks gibt
-    if (videoTracks.length > 0) {
-        // Hole das aktuelle facingMode
-        const facingMode = videoTracks[0].getSettings().facingMode;
-
-        // Bestimme den neuen facingMode
-        const newFacingMode = facingMode === 'user' ? 'environment' : 'user';
-
-        // Ändere den facingMode für alle Videotracks
-        videoTracks.forEach(track => {
-            track.applyConstraints({ facingMode: newFacingMode });
-        });
-    }
-
-    // Starte die Webcam erneut mit der neuen Konfiguration
-    await webcam.start();
 }
