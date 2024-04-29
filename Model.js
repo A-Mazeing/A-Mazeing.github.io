@@ -77,7 +77,5 @@ async function predict() {
 
 async function switchCamera()
 {
-    webcam.stop();
     webcam.flip();
-    await webcam.play();
 }
