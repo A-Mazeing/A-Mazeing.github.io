@@ -75,9 +75,27 @@ async function predict() {
     }
 }
 
-async function switchCamera()
-{
-    await webcam.stop();
-    webcam.flip;
-    await webcam.play();
+async function switchCamera() {
+    // Stoppe die Webcam, um sie neu zu konfigurieren
+    webcam.stop();
+
+    // Hole alle Videotracks der Webcam
+    const videoTracks = webcam.webcam.getVideoTracks();
+
+    // Überprüfe, ob es Videotracks gibt
+    if (videoTracks.length > 0) {
+        // Hole das aktuelle facingMode
+        const facingMode = videoTracks[0].getSettings().facingMode;
+
+        // Bestimme den neuen facingMode
+        const newFacingMode = facingMode === 'user' ? 'environment' : 'user';
+
+        // Ändere den facingMode für alle Videotracks
+        videoTracks.forEach(track => {
+            track.applyConstraints({ facingMode: newFacingMode });
+        });
+    }
+
+    // Starte die Webcam erneut mit der neuen Konfiguration
+    await webcam.start();
 }
