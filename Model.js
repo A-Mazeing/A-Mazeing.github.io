@@ -105,3 +105,26 @@ async function predict() {
         labelContainer.innerHTML = classPrediction;
     }
 }
+const devices = await navigator.mediaDevices.enumerateDevices();
+const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+if (videoDevices.length < 2) {
+    console.log("Nicht genügend Kameras gefunden.");
+    return;
+}
+
+// Bestimmen, welches Gerät aktuell nicht ausgewählt ist
+const currentDeviceId = webcam.stream.getVideoTracks()[0].getSettings().deviceId;
+const newDevice = videoDevices.find(device => device.deviceId !== currentDeviceId);
+
+if (newDevice) {
+    const newStream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: newDevice.deviceId } } });
+    webcam.stream.getVideoTracks()[0].stop(); // Stoppen des aktuellen Streams
+    webcam.stream = newStream;
+    webcam.video.srcObject = newStream;
+    webcam.video.play();
+    console.log("Kamera wurde gewechselt zu: " + newDevice.label);
+} else {
+    console.log("Kamera-Wechsel fehlgeschlagen.");
+}
+
