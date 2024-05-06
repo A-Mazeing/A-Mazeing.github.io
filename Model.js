@@ -31,7 +31,7 @@ async function init() {
     //Init Webcam
     if (!bCanvasCreating) {
             webcam = new tmImage.Webcam(width, height, bflip_in);
-            await webcam.setup(); //aktiviert die Außenkamera
+            await webcam.setup(); 
             bCanvasCreating = true;
     }
 

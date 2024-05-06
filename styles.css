@@ -3,6 +3,40 @@ body {
     padding: 0; /* Innenabstand des body-Element aufheben */
 }
 
+#startseite
+{
+    background-image: url('Pics/Background.jpg');
+    background-size: 100% 100%; 
+    background-position: left;
+    background-repeat: no-repeat;
+    width: 100vw; 
+    height: 100vh;
+
+}
+
+#startButton
+{
+    background-color: rgba(233, 6, 233, 0.815);
+    color: white;
+    font-family: 'Open Sans Bold', sans-serif;
+    border-radius: 20px; 
+    padding: 1% 20%; 
+    font-size: 20px;
+    border: none; 
+    cursor: pointer; /* Ändere den Cursor, um anzuzeigen, dass der Button anklickbar ist */
+    transition: background-color 0.75s; /* Füge eine Übergangseffekt für den Hover-Effekt hinzu */
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#startButton:hover
+{
+    background-color: rgba(104, 2, 104, 0.815); /* Dunklerer Hintergrund beim Hover */
+}
+
 
 
 /*Allgemeine Site Div*/
@@ -14,7 +48,7 @@ body {
     width: 100vw; 
     height: 100vh; 
     box-sizing: border-box;
-    display: flex; /*deaktiviert beim Start*/ 
+    display: none; /*deaktiviert beim Start*/ 
     justify-content: center; 
     align-items: center; 
     flex-direction: column;

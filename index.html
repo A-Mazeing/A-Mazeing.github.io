@@ -10,12 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script src="Model.js"></script>
-    <script src="siteFunctions.js"></script>
-    <!-- Wird der Startbutton von der Startseite sein -->
+    <script src="stdFunc.js"></script>
 
-    <!--<div id = "startseite">
-        <button id = "startButton" type="button" onclick="BildschirmSwitch()">Start</button>
-    </div> -->
+    <div id = "startseite">
+        <button id = "startButton" type="button" onclick="startSeiteChange()">Start</button>
+    </div>
     
     
     <!-- Bereich Main mit Kamera Canvas-->
@@ -28,7 +27,7 @@
         </div>
 
         <!-- Buttons -->
-        <button type="button" class="btn btn-primary ergebnis_button" onclick="init()">Klassifizieren</button>
+        <button type="button" class="btn btn-primary ergebnis_button" onclick="">Klassifizieren</button>
 
         <!-- Container für die Klassifizierungen -->
         <div id="Ergebnis_Text">Ergebnis</div>
