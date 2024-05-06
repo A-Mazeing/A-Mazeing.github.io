@@ -3,6 +3,11 @@ const URL = 'https://teachablemachine.withgoogle.com/models/x7VbUE8f3/';
 
 let model, webcam, labelContainer, maxPredictions;
 let isIos = false; 
+
+const bflip_in = true; // ob die Webcam gespiegelt werden soll
+const width = 200;
+const height = 200;
+
 // Prüfen, ob es sich um ein iOS-Gerät handelt
 if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
   isIos = true;
@@ -11,50 +16,23 @@ if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAg
 let bCanvasCreating = false
 // Funktion zum Initialisieren des Modells und der Webcam
 async function init() {
+
+    //---------------------------------------------------------//
+    //Init Model 
     const modelURL = URL + 'model.json';
     const metadataURL = URL + 'metadata.json';
 
+
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
+    //---------------------------------------------------------//
 
-    const flip = true; // ob die Webcam gespiegelt werden soll
-    const width = 200;
-    const height = 200;
 
-    let useExternalCamera = false; // Flag, um zu bestimmen, ob die Außenkamera verwendet werden soll
-
-    // Überprüfen, ob es sich um ein Mobilgerät handelt
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        useExternalCamera = true; // Wenn ja, verwende die Außenkamera
-    }
-
+    //Init Webcam
     if (!bCanvasCreating) {
-        // Wenn eine externe Kamera verwendet werden soll, verwende die Außenkamera
-        if (useExternalCamera) {
-            //try {
-                const externalStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-                const externalVideo = document.createElement('video');
-                externalVideo.srcObject = externalStream;
-                externalVideo.setAttribute('playsinline', true);
-                externalVideo.muted = true;
-                externalVideo.style.width = width + 'px';
-                externalVideo.style.height = height + 'px';
-                externalVideo.play();
-
-                document.getElementById('webcam-container').appendChild(externalVideo);
-            //} catch (error) {
-                console.error('Unable to access external camera:', error);
-                // Fallback to default camera
-                webcam = new tmImage.Webcam(width, height, flip);
-                await webcam.setup();
-                bCanvasCreating = true;
-            //}
-        } else {
-            // Verwende die Standard-Webcam
-            webcam = new tmImage.Webcam(width, height, flip);
+            webcam = new tmImage.Webcam(width, height, bflip_in);
             await webcam.setup();
             bCanvasCreating = true;
-        }
     }
 
     // Wenn es sich um ein iOS-Gerät handelt, füge die Webcam direkt ein
@@ -105,26 +83,12 @@ async function predict() {
         labelContainer.innerHTML = classPrediction;
     }
 }
-const devices = await navigator.mediaDevices.enumerateDevices();
-const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-if (videoDevices.length < 2) {
-    console.log("Nicht genügend Kameras gefunden.");
-    return;
+async function switchCam() {
+    webcam.stop();
+    webcam = new tmImage.Webcam(width, height, bflip_in);
+
+    await webcam.setup({ facingMode: "environment" });
+    await webcam.play();    
+    window.requestAnimationFrame(loop);
 }
-
-// Bestimmen, welches Gerät aktuell nicht ausgewählt ist
-const currentDeviceId = webcam.stream.getVideoTracks()[0].getSettings().deviceId;
-const newDevice = videoDevices.find(device => device.deviceId !== currentDeviceId);
-
-if (newDevice) {
-    const newStream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: newDevice.deviceId } } });
-    webcam.stream.getVideoTracks()[0].stop(); // Stoppen des aktuellen Streams
-    webcam.stream = newStream;
-    webcam.video.srcObject = newStream;
-    webcam.video.play();
-    console.log("Kamera wurde gewechselt zu: " + newDevice.label);
-} else {
-    console.log("Kamera-Wechsel fehlgeschlagen.");
-}
-
