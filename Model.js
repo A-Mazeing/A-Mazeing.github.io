@@ -86,7 +86,7 @@ async function predict() {
 
 async function switchCam() {
     webcam.stop();
-    webcam = new tmImage.Webcam(width, height, bflip_in);
+    //webcam = new tmImage.Webcam(width, height, bflip_in);
 
     await webcam.setup({ facingMode: "environment" });
     await webcam.play();    
