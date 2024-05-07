@@ -39,7 +39,7 @@ async function dropDownClick(device){
 
 //---------------------------------------------------------//
 //Init Model 
-async function modelInit(url_Model) {
+async function modelInit(url_Model) { 
 
     const modelURL = url_Model + 'model.json';
     const metadataURL = url_Model + 'metadata.json';
