@@ -1,46 +1,54 @@
 // der Link zu Ihrem Modell von Teachable Machine
-const URL = 'https://teachablemachine.withgoogle.com/models/x7VbUE8f3/';
+const URL = 'https://teachablemachine.withgoogle.com/models/QDR5yXDHF/';
 
 let model, webcam, labelContainer, maxPredictions;
-let isIos = false; 
+let bIsIos = false; 
 
-const bflip_in = true; // ob die Webcam gespiegelt werden soll
+const bflip_in = true; // Spieglung der Webcam
 const width = 200;
 const height = 200;
 
+//---------------------------------------------------------//
 // Prüfen, ob es sich um ein iOS-Gerät handelt
 if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
-  isIos = true;
+    bIsIos = true;
 }
 
-let bCanvasCreating = false
-// Funktion zum Initialisieren des Modells und der Webcam
-async function init() {
 
-    //---------------------------------------------------------//
-    //Init Model 
-    const modelURL = URL + 'model.json';
-    const metadataURL = URL + 'metadata.json';
+//---------------------------------------------------------//
+//Init Model 
+async function modelInit(url_Model) {
+
+    const modelURL = url_Model + 'model.json';
+    const metadataURL = url_Model + 'metadata.json';
 
 
     model = await tmImage.load(modelURL, metadataURL);
     maxPredictions = model.getTotalClasses();
-    //---------------------------------------------------------//
+}
 
-
-    //Init Webcam
-    if (!bCanvasCreating) {
-            webcam = new tmImage.Webcam(width, height, bflip_in);
-            await webcam.setup(); 
-            bCanvasCreating = true;
+//---------------------------------------------------------//
+//Webframe erstellen und für Ios anpassen 
+async function createWebcam(breite, hoehe, bSpiegelung, device, bIos) {
+    
+    // Erstellt das WebcamObjekt
+    if (width && height && bflip_in){
+        webcam = new tmImage.Webcam(breite, hoehe, bSpiegelung);
+    } else {
+        console.error('Parameter createWebcam missing');
+    }
+    if (device){
+        await webcam.setup({deviceId: devices[0].deviceId});
+    } else {
+        await webcam.setup({ facingMode: "environment" }); //Standart: Rückseitenkamera
     }
 
-    // Wenn es sich um ein iOS-Gerät handelt, füge die Webcam direkt ein
-    if (isIos) {
+    //Platformhandling: IOS ist komisch deshalb das
+    if(bIos){
         document.getElementById('webcam-container').appendChild(webcam.webcam);
-        const webCamVideo = document.getElementsByTagName('video')[0];
+        const webCamVideo = document.getElementsByTagName('video')[0]; //erstes Video Element von Dom 
         webCamVideo.setAttribute("playsinline", true);
-        webCamVideo.muted = "true";
+        webCamVideo.muted = "true"; //Autoplaystopp von IOS hindern, die letzten 2 zeilen nicht entfernen 
         webCamVideo.style.width = width + 'px';
         webCamVideo.style.height = height + 'px';
     } else {
@@ -50,45 +58,45 @@ async function init() {
         document.getElementById("webcam-container").appendChild(canvas);
     }
 
-    // Container für die Klassifizierungen
-    labelContainer = document.getElementById('Exp_Ergebnis');
-    for (let i = 0; i < maxPredictions; i++) {
-        labelContainer.appendChild(document.createElement('div'));
-    }
     webcam.play();
-    window.requestAnimationFrame(loop);
+    
+}
+
+//---------------------------------------------------------//
+//Allgemeine Init und festlegung einmaliger Aufrufe 
+async function init() {
+
+    await modelInit(URL);
+
+    await createWebcam(width, height, bflip_in, undefined, bIsIos);
+
+    // Container indem das Ergebnis gezeigt wird
+    labelContainer = document.getElementById('Exp_Ergebnis');
+
+    window.requestAnimationFrame(loop); //jeden Frame wird loop aufgerufen 
+
     //Altes Div auf Schwarz nach start der Kamera um Rand zu entfernen
     document.getElementById('webcam-container').style.backgroundColor = 'black';
 }
 
 
+
+//---------------------------------------------------------//
+// predictTopK gibt den höchsten Wert der Prediction aus 
+async function predict() {
+    let prediction;
+    if (bisIos) {
+        prediction = await model.predictTopK(webcam.webcam, bflip_in); 
+    } else {
+        prediction = await model.predictTopK(webcam.canvas, bflip_in);
+    }
+    labelContainer.innerHTML = prediction[0].className + ": " + prediction[0].probability.toFixed(2);
+}
+
+//---------------------------------------------------------//
 // Funktion zum Aktualisieren und Vorhersagen mit der Webcam
 async function loop() {
     webcam.update();
     await predict();
-    window.requestAnimationFrame(loop);
-}
-
-// Funktion zum Durchführen von Vorhersagen
-async function predict() {
-    let prediction;
-    if (isIos) {
-        prediction = await model.predict(webcam.webcam);
-    } else {
-        prediction = await model.predict(webcam.canvas);
-    }
-    for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction =
-            prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-        labelContainer.innerHTML = classPrediction;
-    }
-}
-
-async function switchCam() {
-    webcam.stop();
-    //webcam = new tmImage.Webcam(width, height, bflip_in);
-
-    await webcam.setup({ facingMode: "environment" });
-    await webcam.play();    
     window.requestAnimationFrame(loop);
 }
