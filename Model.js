@@ -110,12 +110,14 @@ async function init() {
 // predictTopK gibt den höchsten Wert der Prediction aus 
 async function predict() {
     let prediction;
-    if (bIsIos) {
-        prediction = await model.predictTopK(webcam.webcam, bflip_in); 
-    } else {
-        prediction = await model.predictTopK(webcam.canvas, bflip_in);
+    if(document.getElementById('webcam-canvas')){
+        if (bIsIos) {
+            prediction = await model.predictTopK(webcam.webcam, bflip_in); 
+        } else {
+            prediction = await model.predictTopK(webcam.canvas, bflip_in);
+        }
+        labelContainer.innerHTML = prediction[0].className + ": " + (prediction[0].probability*100).toFixed() + '%';
     }
-    labelContainer.innerHTML = prediction[0].className + ": " + (prediction[0].probability*100).toFixed() + '%';
 }
 
 //---------------------------------------------------------//
