@@ -1,4 +1,4 @@
-function startSeiteChange(){
+/*function startSeiteChange(){
     var div_startSeite = document.getElementById('startseite');
     var div_container = document.querySelector('.container');
 
@@ -10,7 +10,7 @@ function startSeiteChange(){
     else {
         console.error('Element nicht gefunden')
     }
-}
+}*/
 
 function dropdowntoggle(){
     var dropdownmenu = document.getElementById('dropdownmenu');

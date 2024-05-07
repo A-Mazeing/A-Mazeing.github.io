@@ -1,62 +1,171 @@
-body {
-    margin: 0; /* Rand um das body-Element entfernen */
-    padding: 0; /* Innenabstand des body-Element aufheben */
-}
-
-#startseite
-{
-    background-image: url('Pics/Background.jpg');
-    background-size: 100% 100%; 
-    background-position: left;
-    background-repeat: no-repeat;
-    width: 100vw; 
-    height: 100vh;
-
-}
-
-#startButton
-{
-    background-color: rgba(233, 6, 233, 0.815);
-    color: white;
+body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschreibung {
     font-family: 'Open Sans Bold', sans-serif;
-    border-radius: 20px; 
-    padding: 1% 20%; 
+    color: white;
+    text-align: center;
+}
+
+/*.stylebutton{
+    text-decoration: none;
+    text-transform: uppercase;
     font-size: 20px;
-    border: none; 
-    cursor: pointer; /* Ändere den Cursor, um anzuzeigen, dass der Button anklickbar ist */
-    transition: background-color 0.75s; /* Füge eine Übergangseffekt für den Hover-Effekt hinzu */
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ff066e, #750459);
+    overflow: hidden;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    color: white;
+    border-radius: 20px;
+    padding: 1% 20%;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.75s;
+}
+.stylebutton:hover {
+    background-color: rgba(104, 2, 104, 0.815);
+}*/
+
+.stylebutton{
+    width: 40%;
+    height: auto;
+    border: none;
+    background-color: black;
+    position: relative;
+    padding: 10px 30px;
+    margin: 0 15px;
+    color: #9900ff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 20px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+.stylebutton:hover{
+    background: #9900ff;
+    color: #000000;
+    box-shadow: 0 0 50px #9900ff;
+    transition-delay: 0.5s;
+}
+.stylebutton:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #9900ff;
+    border-left: 2px solid #9900ff;
+    transition: 0.5s;
+}
+.stylebutton:hover:before{
+    width: 100%;
+    height: 100%;
+}
+.stylebutton:after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid #9900ff;
+    border-right: 2px solid #9900ff;
+    transition: 0.5s;
+}
+.stylebutton:hover:after{
+    width: 100%;
+    height: 100%;
 }
 
-#startButton:hover
+
+
+#whitespace{
+    height: 15%;
+}
+
+#KunstInteraktivText{
+
+    color: #ffffff;
+    text-align: center;
+    display: block;
+    font-size: 40px;
+    
+}
+.KIText {
+    color: #ff066e;
+}
+
+
+
+.loading{
+    margin: 0;
+    padding: 0;
+    font-family: consolas;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0,0,0,0.2));
+}
+.loading span{
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.5em;
+    font-size: 4em;
+    color: white;
+    text-transform: uppercase;
+    animation: animate 1s ease-in-out infinite;
+    animation-delay: calc(0.1s*var(--i));
+
+}
+@keyframes animate
 {
-    background-color: rgba(104, 2, 104, 0.815); /* Dunklerer Hintergrund beim Hover */
+    0%
+    {
+        transform: translateY(0px);
+    }
+    10%
+    {
+        transform: translateY(-10px);
+    }
+    20%
+    {
+        transform: translateY(-20px);
+    }
+    30%
+    {
+        transform: translateY(-30px);
+    }
+    40%
+    {
+        transform: translateY(-40px);
+    }
 }
 
-
-
-/*Allgemeine Site Div*/
-.container {
+#startseite, .container, .loading {
     background-image: url('Pics/Background.jpg');
-    background-size: 100% 100%; 
+    background-size: 100% 100%;
     background-position: left;
     background-repeat: no-repeat;
-    width: 100vw; 
-    height: 100vh; 
+    width: 100vw;
+    height: 100vh;
+}
+
+#startButton {
+    position: relative;
+}
+
+.container {
     max-width: 100%;
     box-sizing: border-box;
-    display: none; /*deaktiviert beim Start*/ 
-    justify-content: center; 
-    align-items: center; 
+    display: none;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
 .container > * {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 #webcam-container {
@@ -64,72 +173,34 @@ body {
     height: 300px;
     background-color: rgb(94, 94, 94);
     border-radius: 20%;
-    margin-bottom: 50px;
-    margin-top: 10px;
+    margin: 10px auto 50px auto;
     position: relative;
-    z-index: 9999; /*setzt die Kamera nach ganz vorne*/
+    z-index: 9999;
 }
 
 #webcam-canvas {
     width: 100%;
     height: 100%;
-    border-radius: inherit; /* Übernimmt die runde Form vom Webcam-Container */
+    border-radius: inherit;
 }
 
-/*TU-Font*/
 @font-face {
     font-family: 'Open Sans Regular';
     src: url('Fonts/OpenSans-Regular.ttf') format('truetype');
 }
 
-.ergebnis_button {
-    background-color: rgba(233, 6, 233, 0.815);
-    color: white;
-    font-family: 'Open Sans Bold', sans-serif;
-    border-radius: 20px; 
-    padding: 1% 20%; 
-    font-size: 20px;
-    border: none; 
-    cursor: pointer; /* Ändere den Cursor, um anzuzeigen, dass der Button anklickbar ist */
-    transition: background-color 0.75s; /* Füge eine Übergangseffekt für den Hover-Effekt hinzu */
-}
-
-.ergebnis_button:hover {
-    background-color: rgba(104, 2, 104, 0.815); /* Dunklerer Hintergrund beim Hover */
-}
-
-
-/*TU-Font*/
 @font-face {
     font-family: 'Open Sans Bold';
     src: url('Fonts/OpenSans-Bold.ttf') format('truetype');
 }
 
-#Ergebnis_Text {
-    color: #d9e229ff;
-    font-family: 'Open Sans Bold', sans-serif; 
-    font-size: 30px;
-    font-weight: bold;
-}
-
-#Exp_Ergebnis, #Exp_Beschreibung {
-    color: white; 
-    font-family: 'Open Sans Regular', sans-serif;
-    font-size: 20px;
-    
-}
-
-#logo
-{
-    width: 200px;
+#logo {
+    width: 12.5%;
     height: auto;
-    position: absolute;
-    bottom: 30px;
-    
+    position: relative;
 }
 
-#camSwitch
-{
+#camSwitch {
     background-color: transparent;
     position: absolute;
     top: 20px;
@@ -141,8 +212,8 @@ body {
     padding: 0;
     border-radius: 20%;
 }
-#camSwitchIcon
-{
+
+#camSwitchIcon {
     width: 100%;
     height: 100%;
 }

@@ -15,10 +15,32 @@
     <script src="stdFunc.js"></script>
 
     <div id = "startseite">
-        <button id = "startButton" type="button" onclick="startSeiteChange()">Start</button>
+      <div id = "whitespace"></div>
+      <div id = "KunstInteraktivText">
+        <span class="KIText">K</span>UNST <br />
+        <span class="KIText">I</span>NTERAKTIV
+      </div>
+      <div id = "whitespace"></div>
+      <div id = "beschreibung">
+        Mit dieser App können Sie <br />Exponate unserer <br />Ausstellung fotografieren<br /> und weitere Informationen abrufen.
+      </div>
+      <div id = "whitespace"></div>
+        <button id = "startButton" class="stylebutton" type="button" onclick="onStartButtonClick()">Start</button>
     </div>
-    
-    
+
+    <div class="loading">
+      <span class = "loadingspan" style="--i:1;">L</span>
+      <span class = "loadingspan" style="--i:2;">o</span>
+      <span class = "loadingspan" style="--i:3;">a</span>
+      <span class = "loadingspan" style="--i:4;">d</span>
+      <span class = "loadingspan" style="--i:5;">i</span>
+      <span class = "loadingspan" style="--i:6;">n</span>
+      <span class = "loadingspan" style="--i:7;">g</span>
+      <span class = "loadingspan" style="--i:8;">.</span>
+      <span class = "loadingspan" style="--i:9;">.</span>
+      <span class = "loadingspan" style="--i:10;">.</span>
+    </div>
+  
     <!-- Bereich Main mit Kamera Canvas-->
     <div class="container">
         <!-- Webcam-Container -->
@@ -33,13 +55,12 @@
             </div>
           </div>
         <!-- Buttons -->
-        <button type="button" class="btn btn-primary ergebnis_button" onclick="">Klassifizieren</button>
+        <button type="button" class="stylebutton" onclick="">Klassifizieren</button>
         <!-- Container für die Klassifizierungen -->
         <div id="Ergebnis_Text">Ergebnis</div>
         <div id="Exp_Ergebnis">Exponat: 0%</div>
         <!--<div id="Exp_Beschreibung">Beschreibung</div> -->
         <img id="logo" src="Pics\Logo_DDI.jpg" alt="Logo DDI">
     </div>
-
 </body>
 </html>
