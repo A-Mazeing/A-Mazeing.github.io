@@ -47,6 +47,7 @@ body {
     background-repeat: no-repeat;
     width: 100vw; 
     height: 100vh; 
+    max-width: 100%;
     box-sizing: border-box;
     display: none; /*deaktiviert beim Start*/ 
     justify-content: center; 

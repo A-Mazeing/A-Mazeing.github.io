@@ -1,7 +1,7 @@
 // der Link zu Ihrem Modell von Teachable Machine
 const URL = 'https://teachablemachine.withgoogle.com/models/QDR5yXDHF/';
 
-let model, webcam, labelContainer, maxPredictions;
+let devices, model, webcam, labelContainer, maxPredictions;
 let bIsIos = false; 
 
 const bflip_in = true; // Spieglung der Webcam
@@ -14,6 +14,14 @@ if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAg
     bIsIos = true;
 }
 
+async function deviceDropdownInit(){
+    devices = await navigator.mediaDevices.enumerateDevices();
+
+    //get Dropdown
+
+    //add elements to dropdown
+
+}
 
 //---------------------------------------------------------//
 //Init Model 
@@ -73,10 +81,12 @@ async function init() {
     // Container indem das Ergebnis gezeigt wird
     labelContainer = document.getElementById('Exp_Ergebnis');
 
-    window.requestAnimationFrame(loop); //jeden Frame wird loop aufgerufen 
-
     //Altes Div auf Schwarz nach start der Kamera um Rand zu entfernen
     document.getElementById('webcam-container').style.backgroundColor = 'black';
+
+    window.requestAnimationFrame(loop); //jeden Frame wird loop aufgerufen 
+    
+
 }
 
 
@@ -85,12 +95,12 @@ async function init() {
 // predictTopK gibt den höchsten Wert der Prediction aus 
 async function predict() {
     let prediction;
-    if (bisIos) {
+    if (bIsIos) {
         prediction = await model.predictTopK(webcam.webcam, bflip_in); 
     } else {
         prediction = await model.predictTopK(webcam.canvas, bflip_in);
     }
-    labelContainer.innerHTML = prediction[0].className + ": " + prediction[0].probability.toFixed(2);
+    labelContainer.innerHTML = prediction[0].className + ": " + (prediction[0].probability*100).toFixed() + '%';
 }
 
 //---------------------------------------------------------//

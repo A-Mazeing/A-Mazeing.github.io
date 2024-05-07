@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teachable Machine Beispiel</title>
+<script src="bootstrap-5.3.3-dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -20,15 +22,20 @@
     <!-- Bereich Main mit Kamera Canvas-->
     <div class="container">
         <!-- Webcam-Container -->
-        <div id="webcam-container">
-            <button id="camSwitch" onclick="">
-                <img id = "camSwitchIcon" src="Pics/camSwitchIcon.png">
-            </button>
-        </div>
+        <div id="webcam-container"></div>
 
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="dropdowntoggle()">
+              Kamera auswählen
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id = "dropdownmenu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
         <!-- Buttons -->
         <button type="button" class="btn btn-primary ergebnis_button" onclick="">Klassifizieren</button>
-
         <!-- Container für die Klassifizierungen -->
         <div id="Ergebnis_Text">Ergebnis</div>
         <div id="Exp_Ergebnis">Exponat: 0%</div>

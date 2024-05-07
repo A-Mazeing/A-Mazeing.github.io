@@ -11,3 +11,13 @@ function startSeiteChange(){
         console.error('Element nicht gefunden')
     }
 }
+
+function dropdowntoggle(){
+    var dropdownmenu = document.getElementById('dropdownmenu');
+    if (dropdownmenu.style.display == "none") {
+        dropdownmenu.style.display = "block"
+    }else{
+        dropdownmenu.style.display = "none"
+    }
+    
+}
