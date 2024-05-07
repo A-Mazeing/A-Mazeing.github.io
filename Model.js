@@ -30,10 +30,10 @@ async function deviceDropdownInit() {
     });
 }
 
-function dropDownClick(device){ 
+async function dropDownClick(device){ 
     var webcamCanvas = document.getElementById('webcam-canvas');
     webcamCanvas.remove();
-    createWebcam(width, height, bflip_in, device, bIsIos);
+    await createWebcam(width, height, bflip_in, device, bIsIos);
 }
 
 
