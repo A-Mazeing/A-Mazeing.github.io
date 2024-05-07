@@ -25,7 +25,7 @@ async function deviceDropdownInit() {
         dropdownItem.classList.add('dropdown-item');
         dropdownItem.href = '#';
         dropdownItem.textContent = device.label;
-        dropdownItem.addEventListener('click', () => dropDownClick(device));
+        dropdownItem.addEventListener('click', () => dropDownClick(device.deviceId));
         dropdownmenu.appendChild(dropdownItem);
     });
 }
@@ -51,7 +51,7 @@ async function modelInit(url_Model) {
 
 //---------------------------------------------------------//
 //Webframe erstellen und für Ios anpassen 
-async function createWebcam(breite, hoehe, bSpiegelung, device, bIos) {
+async function createWebcam(breite, hoehe, bSpiegelung, deviceId, bIos) {
     
     // Erstellt das WebcamObjekt
     if (width && height && bflip_in){
@@ -60,7 +60,7 @@ async function createWebcam(breite, hoehe, bSpiegelung, device, bIos) {
         console.error('Parameter createWebcam missing');
     }
     if (device){
-        await webcam.setup({deviceId: devices[0].deviceId});
+        await webcam.setup({deviceId});
     } else {
         await webcam.setup({ facingMode: "environment" }); //Standart: Rückseitenkamera
     }
