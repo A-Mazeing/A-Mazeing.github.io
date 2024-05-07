@@ -59,7 +59,7 @@ async function createWebcam(breite, hoehe, bSpiegelung, deviceId, bIos) {
     } else {
         console.error('Parameter createWebcam missing');
     }
-    if (device){
+    if (deviceId){
         await webcam.setup({deviceId});
     } else {
         await webcam.setup({ facingMode: "environment" }); //Standart: Rückseitenkamera
