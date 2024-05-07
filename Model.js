@@ -15,11 +15,22 @@ if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAg
 }
 
 async function deviceDropdownInit(){
-    devices = await navigator.mediaDevices.enumerateDevices();
-
+    let d = await navigator.mediaDevices.enumerateDevices();
+    devices = d;
     //get Dropdown
+    var dropdownmenu = document.getElementById('dropdownmenu');
 
     //add elements to dropdown
+     devices.forEach(device => {
+        const dropdownItem = document.createElement('a');
+        dropdownItem.classList.add('dropdown-item');
+        dropdownItem.href = '#';
+
+        dropdownItem.textContent = device.label;
+
+        dropdownmenu.appendChild(dropdownItem);
+     })
+
 
 }
 
@@ -78,6 +89,7 @@ async function init() {
 
     await createWebcam(width, height, bflip_in, undefined, bIsIos);
 
+    await deviceDropdownInit();
     // Container indem das Ergebnis gezeigt wird
     labelContainer = document.getElementById('Exp_Ergebnis');
 
