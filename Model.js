@@ -14,25 +14,28 @@ if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAg
     bIsIos = true;
 }
 
-async function deviceDropdownInit(){
-    let d = await navigator.mediaDevices.enumerateDevices();
-    devices = d;
-    //get Dropdown
-    var dropdownmenu = document.getElementById('dropdownmenu');
+async function deviceDropdownInit() {
+    // Enumerate devices
+    devices = await navigator.mediaDevices.enumerateDevices();
 
-    //add elements to dropdown
-     devices.forEach(device => {
+    // Populate dropdown
+    var dropdownmenu = document.getElementById('dropdownmenu');
+    devices.forEach(device => {
         const dropdownItem = document.createElement('a');
         dropdownItem.classList.add('dropdown-item');
         dropdownItem.href = '#';
-
         dropdownItem.textContent = device.label;
-
+        dropdownItem.addEventListener('click', () => dropDownClick(device));
         dropdownmenu.appendChild(dropdownItem);
-     })
-
-
+    });
 }
+
+function dropDownClick(device){
+    var webcamCanvas = document.getElementById('webcam-canvas');
+    webcamCanvas.remove();
+    createWebcam(width, height, bSpiegelung, device, bIsIos);
+}
+
 
 //---------------------------------------------------------//
 //Init Model 
