@@ -12,12 +12,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script src="Model.js"></script>
-    <script src="stdFunc.js"></script>
 
     <div id = "startseite">
       <div id = "whitespace"></div>
       <div id = "KunstInteraktivText">
-        <span class="KIText">K</span>UNST <br />
+        <span class="KIText">K</span>UNST <br>
         <span class="KIText">I</span>NTERAKTIV
       </div>
       <div id = "whitespace"></div>
@@ -25,7 +24,15 @@
         Mit dieser App können Sie <br />Exponate unserer <br />Ausstellung fotografieren<br /> und weitere Informationen abrufen.
       </div>
       <div id = "whitespace"></div>
-        <button id = "startButton" class="stylebutton" type="button" onclick="onStartButtonClick()">Start</button>
+      <div id = "inputcontainer">
+        <div class="inputBox">
+          <input id = "inputText" type="text" required="required" onblur="setUrl()">
+          <span id = "inputSpan">Link oder Tag einfügen</span>
+        </div>
+      </div>      
+
+      <div id = "whitespace"></div>
+        <button id = "startButton" class="stylebutton" type="button" onclick="onStartButtonClick()" disabled = "true">Start</button>
     </div>
 
     <div class="loading">

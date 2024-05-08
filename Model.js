@@ -1,5 +1,5 @@
 // der Link zu Ihrem Modell von Teachable Machine
-const URL = 'https://teachablemachine.withgoogle.com/models/QDR5yXDHF/';
+gModelURL = '';
 
 let devices, model, webcam, labelContainer, maxPredictions;
 let bIsIos = false; 
@@ -16,7 +16,7 @@ if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAg
 
 async function deviceDropdownInit() {
     // Enumerate devices
-    devices = await navigator.mediaDevices.enumerateDevices();
+    devices = (await navigator.mediaDevices.enumerateDevices()).filter(device => device.kind === 'videoinput');
 
     // Populate dropdown
     var dropdownmenu = document.getElementById('dropdownmenu');
@@ -88,7 +88,7 @@ async function createWebcam(breite, hoehe, bSpiegelung, deviceId, bIos) {
 //Allgemeine Init und festlegung einmaliger Aufrufe 
 async function init() {
 
-    await modelInit(URL);
+    await modelInit(gModelURL);
 
     await createWebcam(width, height, bflip_in, undefined, bIsIos);
 
@@ -140,4 +140,33 @@ function onStartButtonClick() {
         var div_container = document.querySelector('.container');
         div_container.style.display = 'flex';
     });
+}
+
+function dropdowntoggle(){
+    var dropdownmenu = document.getElementById('dropdownmenu');
+    if (dropdownmenu.style.display == "none") {
+        dropdownmenu.style.display = "block"
+    }else{
+        dropdownmenu.style.display = "none"
+    }
+    
+}
+
+function setUrl()
+{
+    var inputUrl = document.getElementById("inputText").value;
+    var startButton = document.getElementById("startButton");
+    const regex = /(?<=models\/)\w+/;
+    
+    inputUrl = inputUrl.match(regex)[0];
+
+    if(inputUrl != '') {
+        startButton.disabled = false;
+        gModelURL = "https://teachablemachine.withgoogle.com/models/" + inputUrl + "/";
+    }
+    else
+    {
+        console.log("ungültiger Link")
+    }
+    
 }
