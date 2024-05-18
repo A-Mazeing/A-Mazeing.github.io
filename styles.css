@@ -132,13 +132,12 @@ body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschr
 #startseite, .container, .loading {
     background-image: url('Pics/Background.jpg');
     background-color: #000000;
-    background-size: 100% 100%;
-    background-position: left;
+    background-size: cover; 
+    background-position: center;
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
-}  
-
+}
 #startButton {
     position: relative;
 }

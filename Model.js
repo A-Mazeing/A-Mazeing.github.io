@@ -152,21 +152,19 @@ function dropdowntoggle(){
     
 }
 
-function setUrl()
-{
+function setUrl() {
     var inputUrl = document.getElementById("inputText").value;
     var startButton = document.getElementById("startButton");
-    const regex = /(?<=models\/)\w+/;
+    const regex = /(?:https:\/\/teachablemachine\.withgoogle\.com\/models\/)?(\w+)/;
     
-    inputUrl = inputUrl.match(regex)[0];
+    var match = inputUrl.match(regex);
 
-    if(inputUrl != '') {
+    if (match) {
+        inputUrl = match[1]; 
+
         startButton.disabled = false;
         gModelURL = "https://teachablemachine.withgoogle.com/models/" + inputUrl + "/";
+    } else {
+        console.log("ungültiger Link");
     }
-    else
-    {
-        console.log("ungültiger Link")
-    }
-    
 }
