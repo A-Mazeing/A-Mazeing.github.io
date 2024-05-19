@@ -1,8 +1,30 @@
+/* Für Mobile 100% - Iphone 14 Pro max stand */
 [class*="page"]{
     width: 100%;
     height: 100%;
 }
 
-@media only screen and () {
-    
+
+@media (max-width: 429px) {
+    #KunstInteraktivText {
+        font-size: 2.9em; 
+    }
+    #beschreibung {
+        font-size: 0.6em;
+    }
+    .stylebutton{
+        font-size: 1em;
+        width: 50%;
+    }
 }
+
+@media (max-width: 400px) {
+    #KunstInteraktivText {
+        font-size: 2.5em; 
+    }
+    #beschreibung {
+        font-size: 0.5em;
+    }
+}
+
+

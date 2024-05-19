@@ -2,12 +2,20 @@ body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschr
     font-family: 'Open Sans Bold', sans-serif;
     color: white;
     text-align: center;
-
 }
 
+body{
+    background-image: url("Pics/Background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
 
 .stylebutton{
-    width: 40%;
+    width: 60%;
     height: auto;
     border: none;
     background-color: black;
@@ -70,7 +78,7 @@ body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschr
     color: #ffffff;
     text-align: left;
     display: inline-block;
-    font-size: 7em;
+    font-size: 3.4em;
     
 }
 .KIText {
@@ -78,7 +86,7 @@ body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschr
 }
 
 #beschreibung{
-    font-size: 2em;
+    font-size: 0.7em;
     color: white;
     display: inline-block;
 }
@@ -92,7 +100,6 @@ body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschr
     justify-content: center;
     align-items: center;
     position: relative;
-
     -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0,0,0,0.2));
 }
 #loading span{
@@ -131,13 +138,11 @@ body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschr
 }
 
 #startseite, #container, #loading {
-    background-image: url('Pics/Background.jpg');
-    background-color: #000000;
-    background-size: 100% 100%;
+    /* background-image: url('Pics/Background.jpg');
+    background-color: #000000; */
+    background-size: 100%,auto;
     background-position: left;
     background-repeat: no-repeat;
-    width: 100%;
-    height: auto;
 }
 #startButton {
     position: relative;
@@ -231,7 +236,7 @@ input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
 
 .inputBox{
     position: relative;
-    width: 50%; /*50% = 250px*/
+    width: 60%; /*50% = 250px*/
     
     
 }
@@ -244,14 +249,14 @@ input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
     border-radius: 10px;
     outline: none;
     color: #fff;
-    font-size: 1.5em;
+    font-size: 0.7em;
 }
 .inputBox span{
     position: absolute;
     left: 0;
     padding: 10px;
     pointer-events: none;
-    font-size: 1.5em;
+    font-size: 0.7em;
     color: white;
     text-transform: uppercase;
     transition:  0.4s;
@@ -259,7 +264,7 @@ input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
 .inputBox input:valid ~ span, .inputBox input:focus ~ span{
     color: #5c32c6;
     transform: translateX(10px) translateY(-7px);
-    font-size: 0.9em;
+    font-size: 0.45em;
     padding: 0 10px;
     background: black;
     border-left: 1px solid #5c32c6;
