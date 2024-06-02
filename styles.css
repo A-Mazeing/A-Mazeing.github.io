@@ -3,8 +3,27 @@ body, .stylebutton, .ergebnis_button, #Ergebnis_Text, #Exp_Ergebnis, #Exp_Beschr
     color: white;
     text-align: center;
 }
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+/*Abstand oben*/
+#KunstInteraktivText{
+    margin-top: 15%;
+}
 
-body{
+#startseite, #container, #loading {
+    height: 100vh;
+    width: 100%;
+    background-image: url('Pics/Background.jpg');
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/* body{
     background-image: url("Pics/Background.jpg");
     background-size: cover;
     background-position: center;
@@ -12,7 +31,7 @@ body{
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-}
+} */
 
 .stylebutton{
     width: 60%;
@@ -137,13 +156,7 @@ body{
     }
 }
 
-#startseite, #container, #loading {
-    /* background-image: url('Pics/Background.jpg');
-    background-color: #000000; */
-    background-size: 100%,auto;
-    background-position: left;
-    background-repeat: no-repeat;
-}
+
 #startButton {
     position: relative;
 }
