@@ -132,12 +132,12 @@ function onStartButtonClick() {
     var div_startSeite = document.getElementById('startseite');
     div_startSeite.style.display = 'none';
 
-    var loading = document.querySelector('.loading');
+    var loading = document.querySelector('#loading');
     loading.style.display = 'flex';
 
     init().then(() => {
         loading.style.display = 'none';
-        var div_container = document.querySelector('.container');
+        var div_container = document.querySelector('#container');
         div_container.style.display = 'flex';
     });
 }
