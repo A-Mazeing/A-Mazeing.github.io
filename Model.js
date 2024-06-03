@@ -5,8 +5,8 @@ let devices, model, webcam, labelContainer, maxPredictions;
 let bIsIos = false; 
 
 const bflip_in = true; // Spieglung der Webcam
-const width = 200;
-const height = 200;
+const width = 400;
+const height = 400;
 
 //---------------------------------------------------------//
 // Prüfen, ob es sich um ein iOS-Gerät handelt
