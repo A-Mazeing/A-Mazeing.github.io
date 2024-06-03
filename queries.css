@@ -4,27 +4,61 @@
     height: 100%;
 }
 
-
-@media (max-width: 429px) {
-    #KunstInteraktivText {
-        font-size: 2.9em; 
-    }
-    #beschreibung {
-        font-size: 0.6em;
-    }
-    .stylebutton{
-        font-size: 1em;
-        width: 50%;
+@media (max-width: 575.98px) {
+    #logo {
+        width: 35%;
     }
 }
 
-@media (max-width: 400px) {
+@media (min-width: 576px) and (max-width: 767.98px) {
+    #logo {
+        width: 30%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #whitespace_oben {
+        height: 7%;
+    }
+    #logo {
+        width: 30%;
+    }
+}
+
+@media (min-width: 1200px) {
+    #whitespace_oben {
+        height: 7%;
+    }
     #KunstInteraktivText {
-        font-size: 2.5em; 
+        margin-top: 11%;
     }
-    #beschreibung {
-        font-size: 0.5em;
+    #logo {
+        width: 20%;
     }
+}
+
+@media (min-width: 2000px)
+{
+    #KunstInteraktivText {
+        font-size: 5em;
+    }
+    #beschreibung, #inputSpan, .inputBox input, #Ergebnis_Text, #Exp_Ergebnis{
+        font-size: 1.2em;
+    }
+    #startButton {
+        font-size: 1.8em;
+    }
+    #whitespace_oben {
+        height: 0%;
+        
+    }
+    #KunstInteraktivText {
+        margin-top: 10%;
+    }
+    #logo {
+        width: 17.5%;
+    }
+
 }
 
 
