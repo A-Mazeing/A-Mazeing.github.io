@@ -167,6 +167,7 @@ body, html{
 
 
 #startButton {
+    margin-top: 5vh;
     position: relative;
     font-size: 1.2em;
     font-style: bold;
@@ -189,8 +190,8 @@ body, html{
 }
 
 #webcam-container {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     background-color: rgb(94, 94, 94);
     border-radius: 20%;
     margin: 10px auto 50px auto;
@@ -252,6 +253,7 @@ input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
 }
 
 #inputcontainer {
+    margin-top: 3vh;
     display: flex;
     justify-content: center;
     align-items: center;

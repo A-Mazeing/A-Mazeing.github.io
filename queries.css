@@ -5,19 +5,10 @@
 }
 
 @media (max-width: 575.98px) {
-    #logo {
-        width: 35%;
-    }
-    #webcam-container {
-        width: 350px;
-        height: 350px;
-    }
+
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-    #logo {
-        width: 30%;
-    }
 
 }
 
@@ -27,13 +18,6 @@
     }
     .inputBox, .stylebutton{
         width: 50%;
-    }
-    #logo {
-        width: 30%;
-    }
-    #webcam-container {
-        width: 400px;
-        height: 400px;
     }
 }
 
@@ -47,15 +31,12 @@
     .inputBox, .stylebutton{
         width: 45%;
     }
-    #logo {
-        width: 20%;
-    }
     #webcam-container {
-        width: 500px;
-        height: 500px;
+        width: 350px;
+        height: 350px;
+
     }
 }
-
 @media (min-width: 2000px)
 { 
     #KunstInteraktivText {
@@ -76,13 +57,6 @@
     }
     #KunstInteraktivText {
         margin-top: 10%;
-    }
-    #logo {
-        width: 17.5%;
-    }
-    #webcam-container {
-        width: 600px;
-        height: 600px;
     }
 
 }
