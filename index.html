@@ -7,32 +7,26 @@
 <script src="bootstrap-5.3.3-dist/js/bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="styles.css">
-<link rel="stylesheet" type="text/css" href="queries.css">
+<!-- <link rel="stylesheet" type="text/css" href="queries.css"> -->
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script src="Model.js"></script>
     <div id = "startseite" class="page">
-      <div id = "whitespace_oben"></div>
-      <div id = "KunstInteraktivText">
+      <div id = "KunstInteraktivText" class="container text-center">
         <span class="KIText">K</span>UNST <br>
         <span class="KIText">I</span>NTERAKTIV
       </div>
-
-      <div id = "whitespace"></div>
-      <div id = "beschreibung">
-        Mit dieser App können Sie <br />Exponate unserer <br />Ausstellung fotografieren<br /> und weitere Informationen abrufen.
+      <div id = "beschreibung" class="container text-center">
+        Mit dieser App können Sie <br />Exponate unserer <br />Ausstellung fotografieren<br /> und weitere Informationen abrufen.<br />
       </div>
-      <div id = "whitespace"></div>
-      <div id = "inputcontainer">
+      <div id = "inputcontainer" class="container text-center">
         <div class="inputBox">
           <input id = "inputText" type="text" required="required" onblur="setUrl()">
           <span id = "inputSpan">Link oder Tag einfügen</span>
         </div>
       </div>      
-
-      <div id = "whitespace"></div>
         <button id = "startButton" class="stylebutton" type="button" onclick="onStartButtonClick()" disabled = "true">Start</button>
     </div>
 

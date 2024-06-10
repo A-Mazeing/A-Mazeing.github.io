@@ -19,7 +19,7 @@ body, html{
 }
 /*Abstand oben*/
 #KunstInteraktivText{
-    margin-top: 5%;
+    margin-top: 15vh;
 }
 
 #startseite, #container, #loading {
@@ -116,6 +116,7 @@ body, html{
     font-size: 1em;
     color: white;
     display: inline-block;
+    margin-top: 5vh;
 }
 
 
