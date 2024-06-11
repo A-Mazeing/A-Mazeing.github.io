@@ -94,20 +94,20 @@ async function init() {
 
     await deviceDropdownInit();
 
-    document.getElementById('mySelect').addEventListener('change', function(){
-        var selectVal = this.value;
+    // document.getElementById('mySelect').addEventListener('change', function(){
+    //     var selectVal = this.value;
 
-        switch(selectVal){
-            case '0':
-                document.getElementById('Klassifizieren').style.display = "none"; 
-            case '1':
-                document.getElementById('Exp_Ergebnis').style.display = "none";
-            case '2':
+    //     switch(selectVal){
+    //         case '0':
+    //             document.getElementById('Klassifizieren').style.display = "none"; 
+    //         case '1':
+    //             document.getElementById('Exp_Ergebnis').style.display = "none";
+    //         case '2':
             
-            default:
-                console.log("Error bei Selection Messung")
-        }
-    })
+    //         default:
+    //             console.log("Error bei Selection Messung")
+    //     }
+    // })
     // Container indem das Ergebnis gezeigt wird
     labelContainer = document.getElementById('Exp_Ergebnis');
 
