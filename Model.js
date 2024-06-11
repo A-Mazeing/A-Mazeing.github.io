@@ -93,6 +93,21 @@ async function init() {
     await createWebcam(width, height, bflip_in, undefined, bIsIos);
 
     await deviceDropdownInit();
+
+    document.getElementById('mySelect').addEventListener('change', function(){
+        var selectVal = this.value;
+
+        switch(selectVal){
+            case '0':
+                document.getElementById('Klassifizieren').style.display = "none"; 
+            case '1':
+                document.getElementById('Exp_Ergebnis').style.display = "none";
+            case '2':
+            
+            default:
+                console.log("Error bei Selection Messung")
+        }
+    })
     // Container indem das Ergebnis gezeigt wird
     labelContainer = document.getElementById('Exp_Ergebnis');
 
@@ -152,10 +167,11 @@ function dropdowntoggle(){
     
 }
 
+// Check nach der eingefügten URL, wenn gültig wird model geladen sonst fehler in console
 function setUrl() {
     var inputUrl = document.getElementById("inputText").value;
     var startButton = document.getElementById("startButton");
-    const regex = /(?:https:\/\/teachablemachine\.withgoogle\.com\/models\/)?(\w+)/;
+    const regex = /(?:https:\/\/teachablemachine\.withgoogle\.com\/models\/)?([\w-]+)/;
     
     var match = inputUrl.match(regex);
 
