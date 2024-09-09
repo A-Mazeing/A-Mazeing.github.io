@@ -8,11 +8,11 @@ const bflip_in = true; // Spieglung der Webcam
 const width = 400;
 const height = 400;
 
-//---------------------------------------------------------//
-// Prüfen, ob es sich um ein iOS-Gerät handelt
-if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
-    bIsIos = true;
-}
+// //---------------------------------------------------------// (TD: Schauen ob von nöten)
+// // Prüfen, ob es sich um ein iOS-Gerät handelt
+// if (window.navigator.userAgent.indexOf('iPhone') > -1 || window.navigator.userAgent.indexOf('iPad') > -1) {
+//     bIsIos = true;
+// }
 
 async function deviceDropdownInit() {
     // Enumerate devices
