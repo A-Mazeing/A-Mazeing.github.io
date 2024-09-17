@@ -245,11 +245,11 @@ body, html{
 }
 
 input:focus, input:valid{
-    color: #5c32c6;
-    border: 4px solid #5c32c6;
+    color:darkred;
+    border: 4px solid darkred;
 }
 input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
-    color: #5c32c6;
+    color:darkred;
     height: 30px;
     line-height: 30px;
     padding: 0 12px;
@@ -275,7 +275,7 @@ input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
 .inputBox input{
     width: 100%;
     padding: 10px;
-    border: 2px solid #5c32c6;
+    border: 2px solid darkred;
     background: black;
     border-radius: 10px;
     outline: none;
@@ -293,7 +293,7 @@ input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
     transition:  0.4s;
 }
 .inputBox input:valid ~ span, .inputBox input:focus ~ span{
-    color: #5c32c6;
+    color: darkred;
     transform: translateX(10px) translateY(-7px);
     font-size: 0.45em;
     padding: 0 10px;
@@ -303,7 +303,7 @@ input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
     letter-spacing: 0.2em;
 }
 .inputBox:nth-child(1) input:valid ~ span, .inputBox:nth-child(1) input:focus ~ span{
-    background-color: #5c32c6;
+    background-color: darkred;
     color: white;
     border-radius: 2px;
 }

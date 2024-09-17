@@ -1,0 +1,157 @@
+body, html {
+    background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(22,22,22,1) 70%, rgba(70,70,70,1) 100%);
+    font-family: 'Open Sans Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    min-width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+#Div_tKunstInteraktiv {
+    color: white;
+    letter-spacing: 0.3em;
+    /* text-align: center; Links ausgerichteter Text */
+}
+
+.row {
+    width: auto;
+    height: 100vh;
+}
+
+/* .container {
+    align-items: center;
+    justify-content: center;
+} */
+
+.span_KIText {
+    font-style: bold;
+    font-size: xx-large;
+    color:rgb(255, 0, 0);
+}
+
+/* ------------------------------------- */
+/* Button */
+/* ------------------------------------- */
+
+.btn{
+    color:white;
+    border-color: darkred;
+    width: 50%;
+    height: 10%;
+    background-color: transparent;
+}
+
+.btn:hover{
+    color: darkred;
+    transition: 0.5s;
+    border-color: darkred;
+}
+
+/* ------------------------------------- */
+/* Form Select Box */
+/* ------------------------------------- */
+.form-select{
+    background-color:transparent;
+    color: white;
+    width: 15vw;
+    height: 4vh;
+    border-color: darkred;
+}
+.form-select option{
+    background-color: black;
+}
+
+/* ------------------------------------- */
+/* Input TextBox */
+/* ------------------------------------- */
+
+
+input:focus, input:valid{
+    color:darkred;
+    border: 4px solid darkred;
+}
+input:focus + .eingabefeld_label, input:valid + .eingabefeld_label{
+    color:darkred;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    transform: translate(-15px, -16px) scale(0.88);
+    z-index: 1111;
+}
+
+#inputcontainer {
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputBox{
+    position: relative;
+    
+    width: 60%;     
+}
+
+.inputBox input{
+    width: 30vw;
+    height: 4vh;
+    padding: 10px;
+    border: 2px solid darkred;
+    background: black;
+    border-radius: 10px;
+    outline: none;
+    color: #fff;
+    font-size: 0.7em;
+}
+.inputBox span{
+    position: absolute;
+    left: 0;
+    padding-left: 20px;
+    padding-top: -20px;
+    pointer-events: none;
+    font-size: 0.7em;
+    color: white;
+    text-transform: uppercase;
+    transition:  0.4s;
+}
+.inputBox input:valid ~ span, .inputBox input:focus ~ span{
+    color: darkred;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.45em;
+    padding: 0 10px;
+    background: black;
+    border-left: 1px solid darkred;
+    border-right: 1px solid darkred;
+    letter-spacing: 0.2em;
+}
+.inputBox:nth-child(1) input:valid ~ span, .inputBox:nth-child(1) input:focus ~ span{
+    background-color: darkred;
+    color: white;
+    border-radius: 2px;
+}
+
+.inputBox input:valid, .inputBox input:focus{
+    border: 1px solid darkred;
+}
+
+/* ------------------------------------- */
+/* Image Eduinf */
+/* ------------------------------------- */
+
+#IMG_EduInfLogo{
+    height: 10%;
+    width: auto;
+    max-width: 50%;
+}
+
+/* ------------------------------------- */
+/* Image KI-Logo */
+/* ------------------------------------- */
+
+#IMG_KI-Logo {
+    width: 20%;
+    height: 20%;
+}

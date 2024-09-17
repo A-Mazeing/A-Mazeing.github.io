@@ -5,27 +5,38 @@ function PageInit(){
 
 //Lädt ein zuvor vom Nutzer erstelltes Model vom Server 
 async function ModelInit(projectName) {
-    try {
-    const path = '../../UserModels/${projectName}';
-    const modelFilePaths = [
-        '${path}/model.js',
-        '${path}/weights.bin',
-        '${path}/metadata.js'
-        
-    ]
-    //Model Laden aus Datei 
-    model = await tmImage.loadFromFiles(modelFilePaths[0], modelFilePaths[1], modelFilePaths[2]); 
-    }catch(error) // TD: Error Handling noch überarbeiten -> FehlerFenster Erstellen
-    {
-        if (error === 'ENOENT') console.error('Datei nicht gefunden');
-        else console.error('unbekannter Fehler');
+  const path = require('path');
+  try {
+    // Erstelle den vollständigen Pfad zum Modellverzeichnis
+    const basePath = path.resolve(__dirname, '../../UserModels', projectName);
+
+    // Definiere die Dateinamen relativ zum Basispfad
+    const modelFileName = 'model.js';
+    const weightsFileName = 'weights.bin';
+    const metadataFileName = 'metadata.js';
+
+    // Erstelle die vollständigen Dateipfade
+    const modelFilePath = path.join(basePath, modelFileName);
+    const weightsFilePath = path.join(basePath, weightsFileName);
+    const metadataFilePath = path.join(basePath, metadataFileName);
+
+    // Übergebe die vollständigen Pfade an tmImage.loadFromFiles
+    model = await tmImage.loadFromFiles(modelFilePath, weightsFilePath, metadataFilePath);
+  } catch (error) {
+    // Bessere Fehlerbehandlung:
+    if (error.code === 'ENOENT') {
+      console.error(`Eine oder mehrere Dateien wurden nicht gefunden: ${error.path}`);
+    } else {
+      console.error('Ein unerwarteter Fehler ist aufgetreten:', error);
+      // Hier könntest du einen Fehlerdialog oder eine Benachrichtigung anzeigen
     }
+  }
 }
 
 //Gibt die % der Testdaten aus
-async function GetModelData(){
+async function GetModelData(folderPath){
 
-    const fs = require('fs'); // Modul zum Arbeiten mit dem Dateisystem
+  const fs = require('fs'); // Modul zum Arbeiten mit dem Dateisystem
   const path = require('path'); // Modul für Pfadmanipulationen
 
   try {
@@ -52,3 +63,5 @@ async function GetModelData(){
     console.error('Error processing files:', error);
   }
 }
+
+ModelInit('Front-Löwe Bias')
