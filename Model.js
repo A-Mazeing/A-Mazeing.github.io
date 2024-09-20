@@ -40,13 +40,31 @@ async function dropDownClick(device){
 //---------------------------------------------------------//
 //Init Model 
 async function modelInit(url_Model) { 
+    try{
+        const modelURL = url_Model + 'model.json';
+        const metadataURL = url_Model + 'metadata.json';
+    
+    
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+    }
+    catch (error) {
+        OnErrorMessage(error.message);
+    }
+    
+}
 
-    const modelURL = url_Model + 'model.json';
-    const metadataURL = url_Model + 'metadata.json';
-
-
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
+function OnErrorMessage(error_message, level_error){
+    switch (level_error){
+        case 0: //Stufe 0: nur Console Log
+            console.log(error_message);
+        case 1: //Stufe 1: Alert Message
+            alert(message);
+        case 2: //Stufe 2: Altert Message + Console Log
+            console.log(error_message);
+            alert(error_message);
+        //case 3: ToDo -> Für zukünftigten Save in Project Datei
+    }; 
 }
 
 //---------------------------------------------------------//
@@ -54,33 +72,39 @@ async function modelInit(url_Model) {
 async function createWebcam(breite, hoehe, bSpiegelung, deviceId, bIos) {
     
     // Erstellt das WebcamObjekt
-    if (width && height && bflip_in){
-        webcam = new tmImage.Webcam(breite, hoehe, bSpiegelung);
-    } else {
-        console.error('Parameter createWebcam missing');
+    try{
+        if (width && height && bflip_in){
+            webcam = new tmImage.Webcam(breite, hoehe, bSpiegelung);
+        } else {
+            console.error('Parameter createWebcam missing');
+        }
+        if (deviceId){
+            await webcam.setup({deviceId});
+        } else {
+            await webcam.setup({ facingMode: "environment" }); //Standart: Rückseitenkamera
+        }
+    
+        //Platformhandling: IOS ist komisch deshalb das
+        if(bIos){
+            document.getElementById('webcam-container').appendChild(webcam.webcam);
+            const webCamVideo = document.getElementsByTagName('video')[0]; //erstes Video Element von Dom 
+            webCamVideo.setAttribute("playsinline", true);
+            webCamVideo.muted = "true"; //Autoplaystopp von IOS hindern, die letzten 2 zeilen nicht entfernen 
+            webCamVideo.style.width = width + 'px';
+            webCamVideo.style.height = height + 'px';
+        } else {
+            const canvas = webcam.canvas;
+            canvas.id = 'webcam-canvas'; // Setzt die ID des Canvas-Elements
+            canvas.style.borderRadius = 'inherit'; // Übernimmt die runde Form vom Webcam-Container
+            document.getElementById("webcam-container").appendChild(canvas);
+        }
+        webcam.play();
+    }catch (error) {
+        OnErrorMessage(error, 2);
     }
-    if (deviceId){
-        await webcam.setup({deviceId});
-    } else {
-        await webcam.setup({ facingMode: "environment" }); //Standart: Rückseitenkamera
-    }
+    
 
-    //Platformhandling: IOS ist komisch deshalb das
-    if(bIos){
-        document.getElementById('webcam-container').appendChild(webcam.webcam);
-        const webCamVideo = document.getElementsByTagName('video')[0]; //erstes Video Element von Dom 
-        webCamVideo.setAttribute("playsinline", true);
-        webCamVideo.muted = "true"; //Autoplaystopp von IOS hindern, die letzten 2 zeilen nicht entfernen 
-        webCamVideo.style.width = width + 'px';
-        webCamVideo.style.height = height + 'px';
-    } else {
-        const canvas = webcam.canvas;
-        canvas.id = 'webcam-canvas'; // Setzt die ID des Canvas-Elements
-        canvas.style.borderRadius = 'inherit'; // Übernimmt die runde Form vom Webcam-Container
-        document.getElementById("webcam-container").appendChild(canvas);
-    }
-
-    webcam.play();
+    
     
 }
 
@@ -94,20 +118,28 @@ async function init() {
 
     await deviceDropdownInit();
 
-    // document.getElementById('mySelect').addEventListener('change', function(){
-    //     var selectVal = this.value;
-
-    //     switch(selectVal){
-    //         case '0':
-    //             document.getElementById('Klassifizieren').style.display = "none"; 
-    //         case '1':
-    //             document.getElementById('Exp_Ergebnis').style.display = "none";
-    //         case '2':
-            
-    //         default:
-    //             console.log("Error bei Selection Messung")
-    //     }
-    // })
+    document.getElementById('container_Auswahl').addEventListener('change', function() {
+        // Greife auf das <select> Element mit der ID 'selectionbox' zu
+        const selectElement = document.getElementById('selectionbox'); 
+        const selectVal = selectElement.value; 
+        
+        // Verwende den ausgewählten Wert in einem switch-Block
+        switch (selectVal) {
+            case '1': // Zeige alles an
+                document.getElementById('Ergebnis_Text').style.display = "block";
+                document.getElementById('Exp_Ergebnis').style.display = "block";
+                break;
+            case '2': // Hier könnte noch Logik hinzugefügt werden
+                break;
+            case '3': // Zeige nur den Klassennamen
+                document.getElementById('Ergebnis_Text').style.display = "block"; 
+                document.getElementById('Exp_Ergebnis').style.display = "none"; 
+                break;
+            default:
+                console.log("Fehler bei der Auswahl");
+        }
+    });
+    
     // Container indem das Ergebnis gezeigt wird
     labelContainer = document.getElementById('Exp_Ergebnis');
 
@@ -150,11 +182,21 @@ function onStartButtonClick() {
     var loading = document.querySelector('#loading');
     loading.style.display = 'flex';
 
-    init().then(() => {
-        loading.style.display = 'none';
-        var div_container = document.querySelector('#container');
-        div_container.style.display = 'flex';
-    });
+    try {
+        init().then(() => {
+            loading.style.display = 'none';
+            var div_container = document.querySelector('#container');
+            div_container.style.display = 'flex';
+        });
+    } catch (error) {
+        if (error.name === 'NotAllowedError') {
+            alert('Zugriff auf die Kamera wurde verweigert. Bitte erlauben Sie den Zugriff in Ihren Browsereinstellungen.');
+        }
+        else {
+            OnErrorMessage(error.message);
+        }
+    }
+    
 }
 
 function dropdowntoggle(){
@@ -184,3 +226,7 @@ function setUrl() {
         console.log("ungültiger Link");
     }
 }
+
+window.onerror = function(message, source, lineno, colno, error) {
+    OnErrorMessage(message, 2);
+};
