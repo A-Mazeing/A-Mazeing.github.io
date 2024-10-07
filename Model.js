@@ -1,4 +1,4 @@
-// der Link zu Ihrem Modell von Teachable Machine
+// der Link zum Modell von Teachable Machine
 gModelURL = '';
 
 let devices, model, webcam, labelContainer, maxPredictions;
